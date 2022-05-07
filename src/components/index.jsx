@@ -4,10 +4,10 @@ import "./App.css";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Toaster } from "react-hot-toast";
 
-import Header from "./header/Header";
-import Body from "./body/Body";
-import Footer from "./footer/Footer";
 import initUser from "./utils/initUser";
+import Header from "./header";
+import Body from "./body";
+import Footer from "./footer";
 
 const App = () => {
   useEffect(() => {

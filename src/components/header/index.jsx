@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.css";
+import "./index.css";
 
 import { useSelector } from "react-redux";
 
@@ -15,7 +15,7 @@ const Header = () => {
         <div className="header-logo">
           <img className="header-logo-image" src={Logo} alt="logo" />
           <div className="header-logo-text unselectable">
-            {process.env.REACT_APP_PROJECT_NAME}{" "}
+            {process.env.REACT_APP_LOGO_TEXT}{" "}
           </div>
         </div>
         {isMetamaskPresent && (

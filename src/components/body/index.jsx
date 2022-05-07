@@ -1,7 +1,7 @@
 import React from "react";
-import "./Body.css";
+import "./index.css";
 
-import Jumbotron from "../jumbotron/Jumbotron";
+import Jumbotron from "../jumbotron";
 
 const Body = () => {
   return (

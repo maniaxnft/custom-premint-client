@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css";
+import "./index.css";
 
 import Twitter from "../../assets/twitter.svg";
 import Telegram from "../../assets/telegram.svg";

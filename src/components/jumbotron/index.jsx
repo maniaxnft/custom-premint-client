@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Jumbotron.css";
+import "./index.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import detectEthereumProvider from "@metamask/detect-provider";
