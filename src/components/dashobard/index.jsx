@@ -3,7 +3,7 @@ import './index.css'
 
  const Dashboard = () => {
   return (
-	<div>index</div>
+	<div className='dashboard'>to be continued..</div>
   )
 }
 

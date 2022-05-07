@@ -8,11 +8,14 @@ import toast from "react-hot-toast";
 import { ACTIONS } from "../../store/actions";
 import ConnectDiscord from "../connect-discord";
 import ConnectTwitter from "../connect-twitter";
+import Dashboard from "../dashobard";
 
 const Jumbotron = () => {
   const dispatch = useDispatch();
   const isMetamaskPresent = useSelector((state) => state.isMetamaskPresent);
   const walletAddress = useSelector((state) => state.walletAddress);
+  const twitterName = useSelector((state) => state.twitterName);
+  const discordName = useSelector((state) => state.discordName);
 
   const checkIfMetamaskPresent = async () => {
     const provider = await detectEthereumProvider();
@@ -41,7 +44,7 @@ const Jumbotron = () => {
 
   useEffect(() => {
     checkIfMetamaskPresent();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,12 +60,9 @@ const Jumbotron = () => {
           </span>
         </div>
         <div className="jumbotron__content__connect">
-        {
-          walletAddress && <ConnectDiscord /> 
-        }
-          {
-          walletAddress && <ConnectTwitter /> 
-        }
+          {walletAddress && <ConnectDiscord />}
+          {walletAddress && <ConnectTwitter />}
+          {twitterName && discordName && <Dashboard />}
         </div>
       </div>
     </div>
