@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
+import { logout } from "../../services";
 
 const ConnectWallet = () => {
   const { isConnecting, signAndVerifyMessage, walletAddress } =
@@ -14,6 +15,12 @@ const ConnectWallet = () => {
     if (!match) return address;
     return `${match[1]}…${match[2]}`;
   };
+
+  useEffect(() => {
+    window.ethereum.on("disconnect", () => {
+      logout();
+    });
+  }, []);
 
   return (
     <div

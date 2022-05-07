@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 import Logo from "../../assets/discord.svg";
 import { authenticateDiscord } from "../../services";
-import { ACTIONS } from "../../state/actions";
+import { ACTIONS } from "../../store/actions";
 
 const ConnectDiscord = () => {
   const discordName = useSelector((state) => state.discordName);

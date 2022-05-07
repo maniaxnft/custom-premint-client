@@ -10,7 +10,8 @@ import {
   isAuthenticated,
 } from "../../services";
 import { useDispatch, useSelector } from "react-redux";
-import { ACTIONS } from "../../state/actions";
+import { ACTIONS } from "../../store/actions";
+import initUser from "../utils/initUser";
 
 const useMetamaskLogin = () => {
   const [isConnecting, setIsConnecting] = useState(false);
@@ -88,6 +89,7 @@ const useMetamaskLogin = () => {
             data: walletAddress,
           },
         });
+        initUser();
       } catch (error) {
         if (error?.code !== 4001) {
           toast.error(error.message);

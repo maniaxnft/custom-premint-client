@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import detectEthereumProvider from "@metamask/detect-provider";
 import toast from "react-hot-toast";
 
-import { ACTIONS } from "../../state/actions";
+import { ACTIONS } from "../../store/actions";
 import ConnectDiscord from "../connect-discord";
 import ConnectTwitter from "../connect-twitter";
 

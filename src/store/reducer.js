@@ -4,6 +4,8 @@ const initialState = {
   loading: false,
   isMetamaskPresent: true,
   walletAddress: "",
+  discordName: "",
+  twitterName: "",
 };
 
 const reducer = (state = initialState, action) => {
