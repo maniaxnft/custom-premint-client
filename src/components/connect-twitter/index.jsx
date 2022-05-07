@@ -6,10 +6,7 @@ import toast from "react-hot-toast";
 import classNames from "classnames";
 
 import Logo from "../../assets/twitter.svg";
-import {
-  requestTwitterToken,
-  checkTwitterResult,
-} from "../../services";
+import { requestTwitterToken, checkTwitterResult } from "../../services";
 
 const ConnectTwitter = () => {
   const twitterName = useSelector((state) => state.twitterName);
@@ -40,7 +37,7 @@ const ConnectTwitter = () => {
     const authenticate = async () => {
       try {
         await checkTwitterResult();
-        showSuccess()
+        showSuccess();
       } catch (e) {
         toast.error(e.message);
       }
@@ -73,21 +70,27 @@ const ConnectTwitter = () => {
   };
 
   return (
-    <>
+    <div className="connect_twitter">
       <div
         className={classNames({
-          connect_twitter: true,
-          connect_twitter__disabled: twitterName,
+          connect_twitter__button: true,
+          connect_twitter__button__disabled: twitterName,
         })}
         onClick={onClick}
       >
-        <img src={Logo} alt="twitter" className="connect_twitter__logo" />
-        <div className="connect_twitter__text">
-          {twitterName ? `You are successfully connected, ${twitterName}!` : "Connect Twitter"}
-        </div>
+        <img
+          src={Logo}
+          alt="twitter"
+          className="connect_twitter__button__logo"
+        />
+        <div className="connect_twitter__button__text">Connect Twitter</div>
       </div>
+
+      {twitterName && (
+        <div className="connect_twitter__success">{`- You are successfully connected, ${twitterName}!`}</div>
+      )}
       {success && <canvas id="confetti_twitter"></canvas>}
-    </>
+    </div>
   );
 };
 

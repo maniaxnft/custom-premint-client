@@ -1,4 +1,11 @@
 .connect_twitter {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 600px;
+}
+
+.connect_twitter__button {
   min-width: 200px;
   height: 30px;
   padding: 10px;
@@ -10,21 +17,24 @@
   background-color: #1da1f2;
   border-radius: 5px;
   font-size: 20px;
-  margin-top: 20px;
 }
-.connect_twitter:hover {
+.connect_twitter__button:hover {
   cursor: pointer;
   opacity: 0.8;
 }
-.connect_twitter__logo {
+.connect_twitter__button__logo {
   height: 15px;
 }
 
-.connect_twitter__text {
+.connect_twitter__button__text {
   margin-left: 10px;
 }
-.connect_twitter__disabled {
+.connect_twitter__button__disabled {
   pointer-events: none;
+}
+.connect_twitter__success {
+  font-size: 20px;
+  margin-left: 3px;
 }
 
 #confetti_twitter {

@@ -72,23 +72,28 @@ const ConnectDiscord = () => {
   }, []);
 
   return (
-    <>
+    <div className="connect_discord">
       <div
         className={classNames({
-          connect_discord: true,
-          connect_discord__disabled: discordName,
+          connect_discord__button: true,
+          connect_discord__button__disabled: discordName,
         })}
         onClick={onClick}
       >
-        <img src={Logo} alt="discord" className="connect_discord__logo" />
-        <div className="connect_discord__text">
-          {discordName
-            ? `You are successfully connected, ${discordName}!`
-            : "Connect Discord"}
-        </div>
+        <img
+          src={Logo}
+          alt="discord"
+          className="connect_discord__button__logo"
+        />
+        <div className="connect_discord__button__text">Connect Discord</div>
       </div>
+      {discordName && (
+        <div className="connect_discord__success">
+          {`- You are successfully connected, ${discordName}!`}
+        </div>
+      )}
       {success && <canvas id="confetti"></canvas>}
-    </>
+    </div>
   );
 };
 
