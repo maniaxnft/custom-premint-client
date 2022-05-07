@@ -18,6 +18,7 @@
 }
 .connect_discord__button__disabled {
   pointer-events: none;
+  opacity: 0.7;
 }
 .connect_discord__button:hover {
   cursor: pointer;
