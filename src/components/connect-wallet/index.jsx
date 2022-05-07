@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 
 import toast from "react-hot-toast";
+import ENS, { getEnsAddress } from "@ensdomains/ensjs";
 
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
@@ -12,12 +13,33 @@ const ConnectWallet = () => {
   const { isConnecting, signAndVerifyMessage, walletAddress } =
     useMetamaskLogin();
 
+  const [wallet, setWallet] = useState("");
+
   const truncateEthAddress = (address) => {
     const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
     const match = String(address).match(truncateRegex);
     if (!match) return address;
     return `${match[1]}…${match[2]}`;
   };
+  useEffect(() => {
+    const checkIfHasEns = async () => {
+      try {
+        const ens = new ENS({
+          provider: window.ethereum,
+          ensAddress: getEnsAddress("1"),
+        });
+        const address = await ens?.getName(walletAddress);
+        const name = address?.name;
+        name ? setWallet(name) : setWallet(truncateEthAddress(walletAddress));
+      } catch (e) {
+        setWallet(truncateEthAddress(walletAddress));
+        console.log(e);
+      }
+    };
+    if (walletAddress) {
+      checkIfHasEns();
+    }
+  }, [walletAddress]);
 
   useEffect(() => {
     window.ethereum.on("accountsChanged", async (accounts) => {
@@ -38,11 +60,11 @@ const ConnectWallet = () => {
       onClick={signAndVerifyMessage}
     >
       <img className="metamask-button-img" src={MetamaskLogo} alt="metamask" />
-      {walletAddress ? <span className="connectedDot"></span> : <></>}
+      {wallet ? <span className="connectedDot"></span> : <></>}
       <div className="metamask-button-text unselectable">
-        {!walletAddress && !isConnecting && "Connect Metamask"}
-        {walletAddress && `Connected to ${truncateEthAddress(walletAddress)}`}
-        {!walletAddress && isConnecting && "Connecting..."}
+        {!wallet && !isConnecting && "Connect Metamask"}
+        {wallet && `Connected to ${wallet}`}
+        {!wallet && isConnecting && "Connecting..."}
       </div>
     </div>
   );
