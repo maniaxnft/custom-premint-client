@@ -19,9 +19,7 @@ export const isAuthenticated = async () => {
 
 export const logout = async () => {
   try {
-    await mainInstance.get("/logout", {
-      withCredentials: true,
-    });
+    await mainInstance.get("/logout", { withCredentials: true });
     return true;
   } catch (e) {
     return false;

@@ -18,6 +18,7 @@ const useMetamaskLogin = () => {
   const dispatch = useDispatch();
   const address = useSelector((state) => state.walletAddress);
 
+
   const checkIsAuthenticated = useCallback(async () => {
     try {
       const walletAddress = await isAuthenticated();

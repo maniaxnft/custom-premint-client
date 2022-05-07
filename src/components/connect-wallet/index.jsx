@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import "./index.css";
 
+import toast from "react-hot-toast";
+
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
 import { logout } from "../../services";
+import disconnect from "../utils/disconnect";
 
 const ConnectWallet = () => {
   const { isConnecting, signAndVerifyMessage, walletAddress } =
@@ -17,8 +20,15 @@ const ConnectWallet = () => {
   };
 
   useEffect(() => {
-    window.ethereum.on("disconnect", () => {
-      logout();
+    window.ethereum.on("accountsChanged", async (accounts) => {
+      if (accounts?.length === 0) {
+        try {
+          await logout();
+          disconnect();
+        } catch (e) {
+          toast.error(e.message);
+        }
+      }
     });
   }, []);
 

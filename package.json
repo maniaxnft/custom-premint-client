@@ -27,6 +27,7 @@
     "react-redux": "^8.0.1",
     "react-scripts": "4.0.3",
     "redux": "^4.2.0",
+    "web3": "^1.7.3",
     "yarn": "^1.22.17"
   },
   "devDependencies": {},
