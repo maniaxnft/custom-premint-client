@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./index.css";
 
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Toaster } from "react-hot-toast";
