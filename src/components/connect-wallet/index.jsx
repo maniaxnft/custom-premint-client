@@ -26,13 +26,15 @@ const ConnectWallet = () => {
       try {
         const provider = await ethers.getDefaultProvider();
         const name = await provider.lookupAddress(walletAddress);
-        name ? setWallet(name) : setWallet(truncateEthAddress(walletAddress));
+        if(name) {
+          setWallet(name)
+        }
       } catch (e) {
-        setWallet(truncateEthAddress(walletAddress));
         console.log(e);
       }
     };
     if (walletAddress) {
+      setWallet(truncateEthAddress(walletAddress))
       checkIfHasEns();
     }
   }, [walletAddress]);
