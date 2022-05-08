@@ -20,6 +20,24 @@ const disconnect = async () => {
       data: "",
     },
   });
+  store.dispatch({
+    type: ACTIONS.IS_FOLLOWING_TWITTER,
+    payload: {
+      data: false,
+    },
+  });
+  store.dispatch({
+    type: ACTIONS.IS_DISCORD_MEMBER,
+    payload: {
+      data: false,
+    },
+  });
+  store.dispatch({
+    type: ACTIONS.OWNED_NFT_COUNT,
+    payload: {
+      data: 0,
+    },
+  });
 };
 
 export default disconnect;

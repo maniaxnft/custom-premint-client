@@ -21,6 +21,30 @@ const initUser = async () => {
         },
       });
     }
+    if (user?.isFollowingFromTwitter) {
+      store.dispatch({
+        type: ACTIONS.IS_FOLLOWING_TWITTER,
+        payload: {
+          data: true,
+        },
+      });
+    }
+    if (user?.isDiscordMember) {
+      store.dispatch({
+        type: ACTIONS.IS_DISCORD_MEMBER,
+        payload: {
+          data: true,
+        },
+      });
+    }
+    if (user?.ownedNFTCount) {
+      store.dispatch({
+        type: ACTIONS.OWNED_NFT_COUNT,
+        payload: {
+          data: user.ownedNFTCount,
+        },
+      });
+    }
   } catch (e) {
     console.log(e);
   }

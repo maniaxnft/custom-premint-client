@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { ACTIONS } from "../../store/actions";
 import ConnectDiscord from "../connect-discord";
 import ConnectTwitter from "../connect-twitter";
-import Dashboard from "../dashobard";
+import Dashboard from "../dashboard";
 
 const Jumbotron = () => {
   const dispatch = useDispatch();

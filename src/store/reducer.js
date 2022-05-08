@@ -6,6 +6,9 @@ const initialState = {
   walletAddress: "",
   discordName: "",
   twitterName: "",
+  isFollowingTwitter: false,
+  isDiscordMember: false,
+  ownedNFTCount: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,6 +45,27 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         twitterName: action.payload.data,
+      };
+    }
+
+    case ACTIONS.IS_FOLLOWING_TWITTER: {
+      return {
+        ...state,
+        isFollowingTwitter: action.payload.data,
+      };
+    }
+
+    case ACTIONS.IS_DISCORD_MEMBER: {
+      return {
+        ...state,
+        isDiscordMember: action.payload.data,
+      };
+    }
+
+    case ACTIONS.OWNED_NFT_COUNT: {
+      return {
+        ...state,
+        ownedNFTCount: action.payload.data,
       };
     }
 
