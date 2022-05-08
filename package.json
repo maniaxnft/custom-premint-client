@@ -15,12 +15,10 @@
     ]
   },
   "dependencies": {
-    "@ensdomains/ensjs": "^2.1.0",
     "@metamask/detect-provider": "^1.2.0",
     "axios": "^0.24.0",
     "classnames": "^2.3.1",
-    "ethereum-ens": "^0.8.0",
-    "ethers": "^5.6.4",
+    "ethers": "^5.6.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-recaptcha-v3": "^1.9.7",

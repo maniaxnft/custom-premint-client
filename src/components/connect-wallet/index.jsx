@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 
 import toast from "react-hot-toast";
-import ENS, { getEnsAddress } from "@ensdomains/ensjs";
+import { ethers } from "ethers";
 
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
@@ -24,12 +24,8 @@ const ConnectWallet = () => {
   useEffect(() => {
     const checkIfHasEns = async () => {
       try {
-        const ens = new ENS({
-          provider: window.ethereum,
-          ensAddress: getEnsAddress("1"),
-        });
-        const address = await ens?.getName(walletAddress);
-        const name = address?.name;
+        const provider = await ethers.getDefaultProvider();
+        const name = await provider.lookupAddress(walletAddress);
         name ? setWallet(name) : setWallet(truncateEthAddress(walletAddress));
       } catch (e) {
         setWallet(truncateEthAddress(walletAddress));
