@@ -43,15 +43,9 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        {ownedNFTCount === 0 && (
+        {ownedNFTCount && (
           <div className="dashboard__body__item">
             <i className="fa-solid fa-xmark fail_color"></i> You have{" "}
-            {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
-          </div>
-        )}
-        {ownedNFTCount > 0 && (
-          <div className="dashboard__body__item">
-            <i className="fa-solid fa-check success_color"></i> You have{" "}
             {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
           </div>
         )}
@@ -73,7 +67,7 @@ const Dashboard = () => {
             <b>Maniac Role</b> in our Discord Server!
           </div>
         )}
-        {ownedNFTCount === 5 && (
+        {ownedNFTCount >= 5 && (
           <div className="dashboard__body__item">
             <i className="fa-solid fa-check success_color"></i> You have{" "}
             <b>Maniax Role</b> in our Discord Server!
