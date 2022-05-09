@@ -9,6 +9,7 @@ const initialState = {
   isFollowingTwitter: false,
   isDiscordMember: false,
   ownedNFTCount: 0,
+  hasRare: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -66,6 +67,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ownedNFTCount: action.payload.data,
+      };
+    }
+    case ACTIONS.HAS_RARE: {
+      return {
+        ...state,
+        hasRare: action.payload.data,
       };
     }
 

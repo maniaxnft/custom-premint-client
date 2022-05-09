@@ -51,6 +51,14 @@ const initUser = async () => {
         },
       });
     }
+    if (user?.hasRare) {
+      store.dispatch({
+        type: ACTIONS.HAS_RARE,
+        payload: {
+          data: user.hasRare,
+        },
+      });
+    }
     store.dispatch({
       type: ACTIONS.SET_LOADING,
       payload: {
