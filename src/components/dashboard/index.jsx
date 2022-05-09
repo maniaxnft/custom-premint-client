@@ -16,12 +16,12 @@ const Dashboard = () => {
         <div className="dashboard__body__item">
           {isFollowingTwitter ? (
             <div>
-              <i class="fa-solid fa-check success_color"></i> You are following
+              <i className="fa-solid fa-check success_color"></i> You are following
               us on Twitter!
             </div>
           ) : (
             <div>
-              <i class="fa-solid fa-xmark fail_color"></i>{" "}
+              <i className="fa-solid fa-xmark fail_color"></i>{" "}
               <a href={process.env.REACT_APP_TWITTER_URL}>
                 You need to follow our Twiiter
               </a>
@@ -31,12 +31,12 @@ const Dashboard = () => {
         <div className="dashboard__body__item">
           {isDiscordMember ? (
             <div>
-              <i class="fa-solid fa-check success_color"></i> You are in our
+              <i className="fa-solid fa-check success_color"></i> You are in our
               Discord Server!
             </div>
           ) : (
             <div>
-              <i class="fa-solid fa-xmark"></i>{" "}
+              <i className="fa-solid fa-xmark"></i>{" "}
               <a href={process.env.REACT_APP_DISCORD_URL}>
                 You need to join our Discord Server
               </a>
@@ -45,49 +45,49 @@ const Dashboard = () => {
         </div>
         {ownedNFTCount === 0 && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-xmark fail_color"></i> You have{" "}
+            <i className="fa-solid fa-xmark fail_color"></i> You have{" "}
             {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
           </div>
         )}
         {ownedNFTCount > 0 && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <i className="fa-solid fa-check success_color"></i> You have{" "}
             {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
           </div>
         )}
         {ownedNFTCount === 0 && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-xmark fail_color"></i> You need at least 1
-            Maniax NFT to have <b>Maniac Role</b> in Discord Server!
+            <i className="fa-solid fa-xmark fail_color"></i> You need at least 1
+            Maniax NFT to have <b>Maniac Role</b> in Discord Server
           </div>
         )}
         {ownedNFTCount < 5 && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-xmark fail_color"></i> If you have 5 NFTs, you
-            will get <b>ManiaX Role</b> in Discord Server!
+            <i className="fa-solid fa-xmark fail_color"></i> If you have 5 NFTs, you
+            will get <b>ManiaX Role</b> in Discord Server
           </div>
         )}
         {ownedNFTCount > 0 && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <i className="fa-solid fa-check success_color"></i> You have{" "}
             <b>Maniac Role</b> in our Discord Server!
           </div>
         )}
         {ownedNFTCount === 5 && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <i className="fa-solid fa-check success_color"></i> You have{" "}
             <b>Maniax Role</b> in our Discord Server!
           </div>
         )}
         {!hasRare && (
           <div className="dashboard__body__item">
-            <i class="fa-solid fa-xmark fail_color"></i> If you have at last one
-            Rare NFT, you will get <b>RareX Role</b> in Discord Server!
+            <i className="fa-solid fa-xmark fail_color"></i> If you have at last one
+            Rare NFT, you will get <b>RareX Role</b> in Discord Server
           </div>
         )}
         {hasRare && (
           <div>
-            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <i className="fa-solid fa-check success_color"></i> You have{" "}
             <b>RareX Role</b> in our Discord Server!
           </div>
         )}
