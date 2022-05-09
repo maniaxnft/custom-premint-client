@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Toaster } from "react-hot-toast";
 
 import initUser from "./utils/initUser";
@@ -15,22 +14,14 @@ const App = () => {
   }, []);
 
   return (
-    <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.REACT_APP_PUBLIC_RECAPTCHA_KEY}
-      scriptProps={{
-        async: false,
-        defer: false,
-        appendTo: "head",
-        nonce: undefined,
-      }}
-    >
+    <div>
       <Toaster />
       <div>
         <Header />
         <Body />
         <Footer />
       </div>
-    </GoogleReCaptchaProvider>
+    </div>
   );
 };
 

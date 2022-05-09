@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 
 import toast from "react-hot-toast";
@@ -8,10 +8,12 @@ import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
 import { logout } from "../../services";
 import disconnect from "../utils/disconnect";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ConnectWallet = () => {
-  const { isConnecting, signAndVerifyMessage, walletAddress } =
+  const { setIsConnecting, isConnecting, signAndVerifyMessage, walletAddress } =
     useMetamaskLogin();
+  const recaptchaRef = useRef(null);
 
   const [wallet, setWallet] = useState("");
 
@@ -21,20 +23,32 @@ const ConnectWallet = () => {
     if (!match) return address;
     return `${match[1]}…${match[2]}`;
   };
+
+  const onClick = async (e) => {
+    try {
+      setIsConnecting(true)
+      const captchaToken = await recaptchaRef.current.executeAsync();
+      recaptchaRef.current.reset();
+      await signAndVerifyMessage(captchaToken);
+    } catch (e) {
+      setIsConnecting(false)
+      toast.error(e.message);
+    }
+  };
   useEffect(() => {
     const checkIfHasEns = async () => {
       try {
         const provider = await ethers.getDefaultProvider();
         const name = await provider.lookupAddress(walletAddress);
-        if(name) {
-          setWallet(name)
+        if (name) {
+          setWallet(name);
         }
       } catch (e) {
         console.log(e);
       }
     };
     if (walletAddress) {
-      setWallet(truncateEthAddress(walletAddress))
+      setWallet(truncateEthAddress(walletAddress));
       checkIfHasEns();
     }
   }, [walletAddress]);
@@ -55,8 +69,13 @@ const ConnectWallet = () => {
   return (
     <div
       className={`metamask-button ${isConnecting ? "disabledbutton" : ""}`}
-      onClick={signAndVerifyMessage}
+      onClick={onClick}
     >
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
+        size="invisible"
+      />
       <img className="metamask-button-img" src={MetamaskLogo} alt="metamask" />
       {wallet ? <span className="connectedDot"></span> : <></>}
       <div className="metamask-button-text unselectable">

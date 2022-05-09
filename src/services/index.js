@@ -26,9 +26,12 @@ export const logout = async () => {
   }
 };
 
-export const getNonce = async ({ walletAddress }) => {
+export const getNonce = async ({ walletAddress, captchaToken }) => {
   try {
-    const res = await mainInstance.post("/nonce", { walletAddress });
+    const res = await mainInstance.post("/nonce", {
+      walletAddress,
+      captchaToken,
+    });
     return res?.data;
   } catch (e) {
     throw new Error(e.message);
@@ -71,11 +74,15 @@ export const authenticateDiscord = async (code) => {
   }
 };
 
-export const requestTwitterToken = async () => {
+export const requestTwitterToken = async (captchaToken) => {
   try {
-    const res = await mainInstance.get("/oauth/twitter/request_token", {
-      withCredentials: true,
-    });
+    const res = await mainInstance.post(
+      "/oauth/twitter/request_token",
+      { captchaToken },
+      {
+        withCredentials: true,
+      }
+    );
     return res.data;
   } catch (e) {
     throw new Error(e.message);

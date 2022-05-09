@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./index.css";
 
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import classNames from "classnames";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import Logo from "../../assets/twitter.svg";
 import { requestTwitterToken, checkTwitterResult } from "../../services";
 
 const ConnectTwitter = () => {
   const twitterName = useSelector((state) => state.twitterName);
+  const recaptchaRef = useRef(null);
 
   const [success, setSuccess] = useState(false);
 
@@ -51,7 +53,9 @@ const ConnectTwitter = () => {
   const onClick = async () => {
     if (!twitterName) {
       try {
-        const oauth_token = await requestTwitterToken();
+        const captchaToken = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
+        const oauth_token = await requestTwitterToken(captchaToken);
         if (oauth_token) {
           window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`;
         } else {
@@ -71,6 +75,11 @@ const ConnectTwitter = () => {
 
   return (
     <div className="connect_twitter">
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
+        size="invisible"
+      />
       <div
         className={classNames({
           connect_twitter__button: true,

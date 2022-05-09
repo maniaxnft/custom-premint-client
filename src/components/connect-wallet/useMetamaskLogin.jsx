@@ -51,7 +51,7 @@ const useMetamaskLogin = () => {
     checkIsAuthenticated();
   }, [checkIsAuthenticated]);
 
-  const signAndVerifyMessage = async () => {
+  const signAndVerifyMessage = async (captchaToken) => {
     if (!address) {
       try {
         setIsConnecting(true);
@@ -68,7 +68,7 @@ const useMetamaskLogin = () => {
 
         // Sign Message
         const signer = provider.getSigner();
-        const nonce = await getNonce({ walletAddress });
+        const nonce = await getNonce({ walletAddress, captchaToken });
 
         const signature = await signer.signMessage(nonce);
         const evmAddress = await signer.getAddress();
@@ -146,6 +146,7 @@ const useMetamaskLogin = () => {
     signAndVerifyMessage,
     disconnect,
     walletAddress: address,
+    setIsConnecting
   };
 };
 
