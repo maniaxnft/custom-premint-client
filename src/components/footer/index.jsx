@@ -14,11 +14,6 @@ const Footer = () => {
   const [telegramHovered, setTelegramHovered] = useState(false);
   const [discordHovered, setDiscordHovered] = useState(false);
 
-const a = () => {
-  console.log('aaaaaaa')
-  setTwitterHovered(true)
-}
-
   return (
     <footer className="footer">
       <div className="footer-content">
