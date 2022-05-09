@@ -61,7 +61,7 @@ const Dashboard = () => {
               {ownedNFTCount === 0 && (
                 <div>
                   <i class="fa-solid fa-xmark fail_color"></i> You need at least
-                  1 Maniac to have <b>Maniac Role</b> in Discord Server!
+                  1 Maniax NFT to have <b>Maniac Role</b> in Discord Server!
                 </div>
               )}
               {ownedNFTCount < 5 && (
