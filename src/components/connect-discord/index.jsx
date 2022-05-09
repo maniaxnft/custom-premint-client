@@ -4,11 +4,12 @@ import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import classNames from "classnames";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import Logo from "../../assets/discord.svg";
 import { authenticateDiscord } from "../../services";
 import { ACTIONS } from "../../store/actions";
-import ReCAPTCHA from "react-google-recaptcha";
+import initUser from "../utils/initUser";
 
 const ConnectDiscord = () => {
   const discordName = useSelector((state) => state.discordName);
@@ -37,6 +38,7 @@ const ConnectDiscord = () => {
         recaptchaRef.current.reset();
         try {
           const discordName = await authenticateDiscord({code, captchaToken});
+          await initUser();
           dispatch({
             type: ACTIONS.SET_DISCORD_NAME,
             payload: {

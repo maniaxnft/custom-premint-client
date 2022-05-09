@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 
 import toast from "react-hot-toast";
-import { ethers } from "ethers";
 
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
@@ -36,20 +35,8 @@ const ConnectWallet = () => {
     }
   };
   useEffect(() => {
-    const checkIfHasEns = async () => {
-      try {
-        const provider = await ethers.getDefaultProvider();
-        const name = await provider.lookupAddress(walletAddress);
-        if (name) {
-          setWallet(name);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
     if (walletAddress) {
       setWallet(truncateEthAddress(walletAddress));
-      checkIfHasEns();
     }
   }, [walletAddress]);
 

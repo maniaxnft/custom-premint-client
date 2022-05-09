@@ -8,6 +8,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import Logo from "../../assets/twitter.svg";
 import { requestTwitterToken, checkTwitterResult } from "../../services";
+import initUser from "../utils/initUser";
 
 const ConnectTwitter = () => {
   const twitterName = useSelector((state) => state.twitterName);
@@ -34,21 +35,31 @@ const ConnectTwitter = () => {
     }, 1500);
   };
 
+  const clearUrlParams = () => {
+    const currURL = window.location.href;
+    const url = currURL.split(window.location.host)[1].split("?")[0];
+    window.history.pushState({}, document.title, url);
+  };
+
+
   useEffect(() => {
-    const url = window.location.href.split("/");
+    const urlParams = new URLSearchParams(window.location.search);
+    const twitterResult = urlParams.get("twitter_result");
     const authenticate = async () => {
       try {
         await checkTwitterResult();
+        await initUser();
         showSuccess();
+        clearUrlParams();
       } catch (e) {
         toast.error(e.message);
       }
     };
-    if (url[3] === "twitter-result") {
+    if (twitterResult) {
       authenticate();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.location]);
+  }, []);
 
   const onClick = async () => {
     if (!twitterName) {
@@ -65,12 +76,6 @@ const ConnectTwitter = () => {
         toast.error(e.message);
       }
     }
-  };
-
-  const clearUrlParams = () => {
-    const currURL = window.location.href;
-    const url = currURL.split(window.location.host)[1].split("/")[0];
-    window.history.pushState({}, document.title, url);
   };
 
   return (
