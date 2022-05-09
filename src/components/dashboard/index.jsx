@@ -16,8 +16,8 @@ const Dashboard = () => {
         <div className="dashboard__body__item">
           {isFollowingTwitter ? (
             <div>
-              <i className="fa-solid fa-check success_color"></i> You are following
-              us on Twitter!
+              <i className="fa-solid fa-check success_color"></i> You are
+              following us on Twitter!
             </div>
           ) : (
             <div>
@@ -63,8 +63,8 @@ const Dashboard = () => {
         )}
         {ownedNFTCount < 5 && (
           <div className="dashboard__body__item">
-            <i className="fa-solid fa-xmark fail_color"></i> If you have 5 NFTs, you
-            will get <b>ManiaX Role</b> in Discord Server
+            <i className="fa-solid fa-xmark fail_color"></i> You need at least 5
+            Maniax NFTs to have <b>ManiaX Role</b> in Discord Server
           </div>
         )}
         {ownedNFTCount > 0 && (
@@ -81,8 +81,8 @@ const Dashboard = () => {
         )}
         {!hasRare && (
           <div className="dashboard__body__item">
-            <i className="fa-solid fa-xmark fail_color"></i> If you have at last one
-            Rare NFT, you will get <b>RareX Role</b> in Discord Server
+            <i className="fa-solid fa-xmark fail_color"></i>{" "}You need at
+            least 1 Rare Maniax NFT to get <b>RareX Role</b> in Discord Server
           </div>
         )}
         {hasRare && (

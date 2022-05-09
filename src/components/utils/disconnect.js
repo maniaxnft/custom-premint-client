@@ -38,6 +38,12 @@ const disconnect = async () => {
       data: 0,
     },
   });
+  store.dispatch({
+    type: ACTIONS.HAS_RARE,
+    payload: {
+      data: false,
+    },
+  });
 };
 
 export default disconnect;
