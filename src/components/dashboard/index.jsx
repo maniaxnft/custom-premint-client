@@ -43,59 +43,52 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        {ownedNFTCount !== undefined && (
+        {ownedNFTCount === 0 && (
           <div className="dashboard__body__item">
-            {ownedNFTCount === 0 && (
-              <div>
-                <i class="fa-solid fa-xmark fail_color"></i> You have{" "}
-                {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
-              </div>
-            )}
-            {ownedNFTCount > 0 && (
-              <div>
-                <i class="fa-solid fa-check success_color"></i> You have{" "}
-                {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
-              </div>
-            )}
-            <div className="dashboard__body__item__sublist">
-              {ownedNFTCount === 0 && (
-                <div>
-                  <i class="fa-solid fa-xmark fail_color"></i> You need at least
-                  1 Maniax NFT to have <b>Maniac Role</b> in Discord Server!
-                </div>
-              )}
-              {ownedNFTCount < 5 && (
-                <div>
-                  <i class="fa-solid fa-xmark fail_color"></i> If you have 5
-                  NFTs, you will get <b>ManiaX Role</b> in Discord Server!
-                </div>
-              )}
-              {ownedNFTCount > 0 && (
-                <div>
-                  <i class="fa-solid fa-check success_color"></i> You have{" "}
-                  <b>Maniac Role</b> in our Discord Server!
-                </div>
-              )}
-              {ownedNFTCount === 5 && (
-                <div>
-                  <i class="fa-solid fa-check success_color"></i> You have{" "}
-                  <b>Maniax Role</b> in our Discord Server!
-                </div>
-              )}
-              {!hasRare && (
-                <div>
-                  <i class="fa-solid fa-xmark fail_color"></i> If you have at
-                  last one Rare NFT, you will get <b>RareX Role</b> in Discord
-                  Server!
-                </div>
-              )}
-              {hasRare && (
-                <div>
-                  <i class="fa-solid fa-check success_color"></i> You have{" "}
-                  <b>RareX Role</b> in our Discord Server!
-                </div>
-              )}
-            </div>
+            <i class="fa-solid fa-xmark fail_color"></i> You have{" "}
+            {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
+          </div>
+        )}
+        {ownedNFTCount > 0 && (
+          <div className="dashboard__body__item">
+            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
+          </div>
+        )}
+        {ownedNFTCount === 0 && (
+          <div className="dashboard__body__item">
+            <i class="fa-solid fa-xmark fail_color"></i> You need at least 1
+            Maniax NFT to have <b>Maniac Role</b> in Discord Server!
+          </div>
+        )}
+        {ownedNFTCount < 5 && (
+          <div className="dashboard__body__item">
+            <i class="fa-solid fa-xmark fail_color"></i> If you have 5 NFTs, you
+            will get <b>ManiaX Role</b> in Discord Server!
+          </div>
+        )}
+        {ownedNFTCount > 0 && (
+          <div className="dashboard__body__item">
+            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <b>Maniac Role</b> in our Discord Server!
+          </div>
+        )}
+        {ownedNFTCount === 5 && (
+          <div className="dashboard__body__item">
+            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <b>Maniax Role</b> in our Discord Server!
+          </div>
+        )}
+        {!hasRare && (
+          <div className="dashboard__body__item">
+            <i class="fa-solid fa-xmark fail_color"></i> If you have at last one
+            Rare NFT, you will get <b>RareX Role</b> in Discord Server!
+          </div>
+        )}
+        {hasRare && (
+          <div>
+            <i class="fa-solid fa-check success_color"></i> You have{" "}
+            <b>RareX Role</b> in our Discord Server!
           </div>
         )}
       </div>

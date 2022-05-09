@@ -21,12 +21,6 @@
   font-size: 20px;
 }
 
-.dashboard__body__item__sublist {
-  padding-top: 10px;
-  padding-left: 10px;
-  font-size: 18px;
-}
-
 .success_color {
   color: green;
 }
