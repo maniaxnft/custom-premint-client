@@ -55,7 +55,8 @@ const useMetamaskLogin = () => {
     if (!address) {
       try {
         setIsConnecting(true);
-        await switchNetworkToAvalanche();
+        // TODO - might need this later on
+        // await switchNetworkToAvalanche();
 
         // Connect Metamask
         const provider = new ethers.providers.Web3Provider(window.ethereum);
