@@ -59,12 +59,13 @@ export const validateSignature = async ({
   }
 };
 
-export const authenticateDiscord = async (code) => {
+export const authenticateDiscord = async ({ code, captchaToken }) => {
   try {
     const res = await mainInstance.post(
       "/oauth/discord",
       {
         code,
+        captchaToken,
       },
       { withCredentials: true }
     );

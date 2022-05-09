@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const Dashboard = () => {
             <div>
               <i className="fa-solid fa-xmark fail_color"></i>{" "}
               <a href={process.env.REACT_APP_TWITTER_URL}>
-                You need to follow our Twiiter
+                You need to follow our Twiter
               </a>
             </div>
           )}
@@ -36,7 +36,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <div>
-              <i className="fa-solid fa-xmark"></i>{" "}
+              <i className="fa-solid fa-xmark fail_color"></i>{" "}
               <a href={process.env.REACT_APP_DISCORD_URL}>
                 You need to join our Discord Server
               </a>

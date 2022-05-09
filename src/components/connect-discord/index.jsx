@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./index.css";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -8,11 +8,13 @@ import classNames from "classnames";
 import Logo from "../../assets/discord.svg";
 import { authenticateDiscord } from "../../services";
 import { ACTIONS } from "../../store/actions";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ConnectDiscord = () => {
   const discordName = useSelector((state) => state.discordName);
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(false);
+  const recaptchaRef = useRef(null);
 
   const onClick = () => {
     if (!discordName) {
@@ -31,8 +33,10 @@ const ConnectDiscord = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get("code");
       if (code) {
+        const captchaToken = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
         try {
-          const discordName = await authenticateDiscord(code);
+          const discordName = await authenticateDiscord({code, captchaToken});
           dispatch({
             type: ACTIONS.SET_DISCORD_NAME,
             payload: {
@@ -73,6 +77,11 @@ const ConnectDiscord = () => {
 
   return (
     <div className="connect_discord">
+       <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
+        size="invisible"
+      />
       <div
         className={classNames({
           connect_discord__button: true,
