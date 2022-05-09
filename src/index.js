@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import "./assets/Korolev/Korolev-Bold.otf";
 
 import { Provider } from "react-redux";
 import store from "./store";
