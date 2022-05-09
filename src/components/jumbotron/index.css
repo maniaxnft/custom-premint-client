@@ -21,7 +21,6 @@
 
 .jumbotron__content__connect {
     display: flex;
-    align-items: center;
     flex-direction: column;
     margin-top: 50px;
 }

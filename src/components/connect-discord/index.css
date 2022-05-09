@@ -1,7 +1,6 @@
 .connect_discord {
   display: flex;
   align-items: center;
-  width: 600px;
 }
 .connect_discord__button {
   min-width: 200px;

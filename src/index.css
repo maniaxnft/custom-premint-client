@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Korolev';
-  src: local('Korolev'),url("./assets/Korolev/Korolev-Bold.otf") format('truetype');
+  src: local('Korolev'),url("./assets/Korolev/Korolev-Medium.otf") format('truetype');
 }
 
 body {

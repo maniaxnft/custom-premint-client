@@ -111,35 +111,35 @@ const useMetamaskLogin = () => {
     logout();
   };
 
-  const switchNetworkToAvalanche = async () => {
-    try {
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0xa86a" }],
-      });
-    } catch (switchError) {
-      // This error code indicates that the chain has not been added to MetaMask.
-      if (switchError.code === 4902) {
-        try {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId: "0xa86a",
-                chainName: "Avalanche Network",
-                rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-              },
-            ],
-          });
-        } catch (addError) {
-          throw new Error(addError);
-        }
-      } else {
-        throw new Error("Please switch to Avalanche Network");
-      }
-      // handle other "switch" errors
-    }
-  };
+  // const switchNetworkToAvalanche = async () => {
+  //   try {
+  //     await window.ethereum.request({
+  //       method: "wallet_switchEthereumChain",
+  //       params: [{ chainId: "0xa86a" }],
+  //     });
+  //   } catch (switchError) {
+  //     // This error code indicates that the chain has not been added to MetaMask.
+  //     if (switchError.code === 4902) {
+  //       try {
+  //         await window.ethereum.request({
+  //           method: "wallet_addEthereumChain",
+  //           params: [
+  //             {
+  //               chainId: "0xa86a",
+  //               chainName: "Avalanche Network",
+  //               rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+  //             },
+  //           ],
+  //         });
+  //       } catch (addError) {
+  //         throw new Error(addError);
+  //       }
+  //     } else {
+  //       throw new Error("Please switch to Avalanche Network");
+  //     }
+  //     // handle other "switch" errors
+  //   }
+  // };
 
   return {
     isConnecting,
