@@ -43,7 +43,7 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        {ownedNFTCount && (
+        {ownedNFTCount !== undefined && (
           <div className="dashboard__body__item">
             <i className="fa-solid fa-xmark fail_color"></i> You have{" "}
             {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
