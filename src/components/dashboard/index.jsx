@@ -38,7 +38,7 @@ const Dashboard = () => {
             <div>
               <i className="fa-solid fa-xmark fail_color"></i>{" "}
               <a href={process.env.REACT_APP_DISCORD_URL}>
-                You need to join our Discord Server
+                You need to join our Discord Server and get a Verified Role
               </a>
             </div>
           )}
