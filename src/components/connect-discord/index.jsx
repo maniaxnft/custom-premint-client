@@ -10,6 +10,7 @@ import Logo from "../../assets/discord.svg";
 import { authenticateDiscord } from "../../services";
 import { ACTIONS } from "../../store/actions";
 import initUser from "../utils/initUser";
+import setLoading from "../utils/loading";
 
 const ConnectDiscord = () => {
   const discordName = useSelector((state) => state.discordName);
@@ -34,9 +35,10 @@ const ConnectDiscord = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get("code");
       if (code) {
-        const captchaToken = await recaptchaRef.current.executeAsync();
-        recaptchaRef.current.reset();
         try {
+          setLoading(true)
+          const captchaToken = await recaptchaRef.current.executeAsync();
+          recaptchaRef.current.reset();
           const discordName = await authenticateDiscord({code, captchaToken});
           await initUser();
           dispatch({
@@ -45,6 +47,7 @@ const ConnectDiscord = () => {
               data: discordName,
             },
           });
+          setLoading(false)
           clearUrlParams();
           setSuccess(true);
           toast.success(`Discord successfully connected, ${discordName}`);
@@ -62,6 +65,7 @@ const ConnectDiscord = () => {
             setSuccess(false);
           }, 1500);
         } catch (e) {
+          setLoading(false)
           dispatch({
             type: ACTIONS.SET_DISCORD_NAME,
             payload: {

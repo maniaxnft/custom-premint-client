@@ -9,6 +9,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Logo from "../../assets/twitter.svg";
 import { requestTwitterToken, checkTwitterResult } from "../../services";
 import initUser from "../utils/initUser";
+import setLoading from "../utils/loading";
+import clearUrlParams from "../utils/clearUrlParams";
 
 const ConnectTwitter = () => {
   const twitterName = useSelector((state) => state.twitterName);
@@ -35,44 +37,45 @@ const ConnectTwitter = () => {
     }, 1500);
   };
 
-  const clearUrlParams = () => {
-    const currURL = window.location.href;
-    const url = currURL.split(window.location.host)[1].split("?")[0];
-    window.history.pushState({}, document.title, url);
-  };
-
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const twitterResult = urlParams.get("twitter_result");
     const authenticate = async () => {
-      try {
-        await checkTwitterResult();
-        await initUser();
-        showSuccess();
-        clearUrlParams();
-      } catch (e) {
-        toast.error(e.message);
+      if (twitterResult) {
+        try {
+          setLoading(true);
+          await checkTwitterResult();
+          await initUser();
+          setLoading(false);
+          showSuccess();
+        } catch (e) {
+          setLoading(false);
+          toast.error(e.message);
+        } finally {
+          clearUrlParams();
+        }
       }
     };
-    if (twitterResult) {
-      authenticate();
-    }
+    authenticate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onClick = async () => {
     if (!twitterName) {
       try {
+        setLoading(true);
         const captchaToken = await recaptchaRef.current.executeAsync();
         recaptchaRef.current.reset();
         const oauth_token = await requestTwitterToken(captchaToken);
         if (oauth_token) {
           window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`;
         } else {
+          setLoading(false);
           toast.error("Unexpected error occured");
         }
       } catch (e) {
+        setLoading(false);
         toast.error(e.message);
       }
     }

@@ -3,6 +3,9 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 140px);
-  max-width: 1200px;
+  width: 1200px;
   font-size: 20px;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.7);
 }
