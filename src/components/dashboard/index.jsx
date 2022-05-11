@@ -73,13 +73,13 @@ const Dashboard = () => {
             <b>Maniax Role</b> in our Discord Server!
           </div>
         )}
-        {!hasRare && (
+        {!hasRare && ownedNFTCount > 0  && (
           <div className="dashboard__body__item">
             <i className="fa-solid fa-xmark fail_color"></i>{" "}You need at
             least 1 Rare Maniax NFT to get <b>RareX Role</b> in Discord Server
           </div>
         )}
-        {hasRare && (
+        {hasRare && ownedNFTCount > 0 && (
           <div>
             <i className="fa-solid fa-check success_color"></i> You have{" "}
             <b>RareX Role</b> in our Discord Server!
