@@ -40,9 +40,9 @@ const ConnectTwitter = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const twitterResult = urlParams.get("twitter_result");
+    const twitterCallback = urlParams.get("twitter_callback");
     const authenticate = async () => {
-      if (twitterResult) {
+      if (twitterCallback) {
         try {
           setLoading(true);
           await checkTwitterResult();
@@ -56,6 +56,7 @@ const ConnectTwitter = () => {
           clearUrlParams();
         }
       }
+  
     };
     authenticate();
     // eslint-disable-next-line react-hooks/exhaustive-deps

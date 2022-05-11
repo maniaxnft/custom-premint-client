@@ -72,7 +72,6 @@ const initUser = async () => {
         data: false,
       },
     });
-    console.log(e);
   }
 };
 

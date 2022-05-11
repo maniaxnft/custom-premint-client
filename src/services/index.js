@@ -34,7 +34,11 @@ export const getNonce = async ({ walletAddress, captchaToken }) => {
     });
     return res?.data;
   } catch (e) {
-    throw new Error(e.message);
+    if (e.response?.data) {
+      throw new Error(e.response.data);
+    } else {
+      throw new Error(e.message);
+    }
   }
 };
 
@@ -55,7 +59,11 @@ export const validateSignature = async ({
     );
     return res.data;
   } catch (e) {
-    throw new Error(e.message);
+    if (e.response?.data) {
+      throw new Error(e.response.data);
+    } else {
+      throw new Error(e.message);
+    }
   }
 };
 
@@ -71,7 +79,11 @@ export const authenticateDiscord = async ({ code, captchaToken }) => {
     );
     return res.data;
   } catch (e) {
-    throw new Error(e.message);
+    if (e.response?.data) {
+      throw new Error(e.response.data);
+    } else {
+      throw new Error(e.message);
+    }
   }
 };
 
@@ -86,7 +98,11 @@ export const requestTwitterToken = async (captchaToken) => {
     );
     return res.data;
   } catch (e) {
-    throw new Error(e.message);
+    if (e.response?.data) {
+      throw new Error(e.response.data);
+    } else {
+      throw new Error(e.message);
+    }
   }
 };
 
@@ -97,8 +113,11 @@ export const checkTwitterResult = async () => {
     });
     return res.data;
   } catch (e) {
-    console.log(e);
-    throw new Error(e.message);
+    if (e.response?.data) {
+      throw new Error(e.response.data);
+    } else {
+      throw new Error(e.message);
+    }
   }
 };
 
@@ -107,6 +126,10 @@ export const getUserInfo = async () => {
     const res = await mainInstance.get("/user", { withCredentials: true });
     return res.data;
   } catch (e) {
-    throw new Error(e.message);
+    if (e.response?.data) {
+      throw new Error(e.response.data);
+    } else {
+      throw new Error(e.message);
+    }
   }
 };
