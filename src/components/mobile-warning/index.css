@@ -1,0 +1,8 @@
+.mobile_warning {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+    min-height: calc(100vh - 140px);
+	font-size: 20px;
+}

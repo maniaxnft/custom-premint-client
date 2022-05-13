@@ -3,6 +3,7 @@ import "./index.css";
 
 import toast from "react-hot-toast";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useSelector } from "react-redux";
 
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
@@ -14,6 +15,7 @@ const ConnectWallet = () => {
   const { setIsConnecting, isConnecting, signAndVerifyMessage, walletAddress } =
     useMetamaskLogin();
   const recaptchaRef = useRef(null);
+  const isMobile = useSelector(state => state.isMobile)
 
   const truncateEthAddress = (address) => {
     const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
@@ -23,7 +25,7 @@ const ConnectWallet = () => {
   };
 
   const onClick = async (e) => {
-    if (!walletAddress) {
+    if (!walletAddress && !isMobile) {
       try {
         setIsConnecting(true);
         setLoading(true);

@@ -10,6 +10,7 @@ const initialState = {
   isDiscordMember: false,
   ownedNFTCount: 0,
   hasRare: false,
+  isMobile: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -69,10 +70,18 @@ const reducer = (state = initialState, action) => {
         ownedNFTCount: action.payload.data,
       };
     }
+
     case ACTIONS.HAS_RARE: {
       return {
         ...state,
         hasRare: action.payload.data,
+      };
+    }
+
+    case ACTIONS.IS_MOBILE: {
+      return {
+        ...state,
+        isMobile: action.payload.data,
       };
     }
 
