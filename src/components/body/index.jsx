@@ -25,6 +25,7 @@ const Body = () => {
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div className="body">{isMobile ? <MobileWarning /> : <Main />}</div>;
