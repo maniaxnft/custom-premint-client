@@ -44,7 +44,7 @@ const Dashboard = () => {
           {isDiscordMember ? (
             <div>
               <i className="fa-solid fa-check success_color"></i> You are in our
-              Discord Server!
+              Discord Server with Verified Role!
             </div>
           ) : (
             <div>

@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     height: calc(100vh - 140px);
 }
 .main__content {
