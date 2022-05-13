@@ -43,10 +43,10 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        {ownedNFTCount !== undefined && (
+         {ownedNFTCount === 0 && (
           <div className="dashboard__body__item">
-            <i className="fa-solid fa-xmark fail_color"></i> You have{" "}
-            {ownedNFTCount} {process.env.REACT_APP_PROJECT_NAME}
+            <i className="fa-solid fa-xmark fail_color"></i> 
+            {" "}You should have at least 1 {process.env.REACT_APP_PROJECT_NAME} that is <b>not listed for sale</b>
           </div>
         )}
         {ownedNFTCount === 0 && (
