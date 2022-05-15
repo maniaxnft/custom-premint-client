@@ -1,7 +1,6 @@
 .main {
     display: flex;
     flex-direction: column;
-    position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
     height: calc(100vh - 140px);
@@ -32,5 +31,9 @@
 .main__content__connect__item {
     margin-top: 30px;
 }
+
+#confetti {
+    position: absolute;
+}  
 
 

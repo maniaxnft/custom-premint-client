@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./index.css";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import classNames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -11,32 +11,23 @@ import { requestTwitterToken, checkTwitterResult } from "../../services";
 import initUser from "../utils/initUser";
 import setLoading from "../utils/loading";
 import clearUrlParams from "../utils/clearUrlParams";
+import { ACTIONS } from "../../store/actions";
 
 const ConnectTwitter = () => {
   const twitterName = useSelector((state) => state.twitterName);
+  const dispatch = useDispatch();
   const recaptchaRef = useRef(null);
-
-  const [success, setSuccess] = useState(false);
 
   const showSuccess = () => {
     clearUrlParams();
-    setSuccess(true);
     toast.success(`Twitter successfully connected`);
-    const canvas = document.getElementById("confetti_twitter");
-    const myConfetti = window.confetti.create(canvas, {
-      resize: true,
-      useWorker: true,
+    dispatch({
+      type: ACTIONS.CONNECTION_SUCCESS,
+      payload: {
+        data: true,
+      },
     });
-    myConfetti({
-      particleCount: 300,
-      spread: 400,
-    });
-    setTimeout(() => {
-      window.confetti.reset();
-      setSuccess(false);
-    }, 1500);
   };
-
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -56,7 +47,6 @@ const ConnectTwitter = () => {
           clearUrlParams();
         }
       }
-  
     };
     authenticate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -107,7 +97,6 @@ const ConnectTwitter = () => {
       {twitterName && (
         <div className="connect_twitter__success">{`- You are successfully connected, ${twitterName}!`}</div>
       )}
-      {success && <canvas id="confetti_twitter"></canvas>}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./index.css";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import classNames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -10,9 +10,11 @@ import Logo from "../../assets/discord.svg";
 import { authenticateDiscord } from "../../services";
 import initUser from "../utils/initUser";
 import setLoading from "../utils/loading";
+import { ACTIONS } from "../../store/actions";
 
 const ConnectDiscord = () => {
   const discordName = useSelector((state) => state.discordName);
+  const dispatch = useDispatch();
   const [success, setSuccess] = useState(false);
   const recaptchaRef = useRef(null);
 
@@ -29,24 +31,17 @@ const ConnectDiscord = () => {
   };
 
   const showSuccess = () => {
-    setLoading(false)
+    setLoading(false);
     clearUrlParams();
     setSuccess(true);
     toast.success(`Discord successfully connected, ${discordName}`);
-    const canvas = document.getElementById("confetti");
-    const myConfetti = window.confetti.create(canvas, {
-      resize: true,
-      useWorker: true,
+    dispatch({
+      type: ACTIONS.CONNECTION_SUCCESS,
+      payload: {
+        data: true,
+      },
     });
-    myConfetti({
-      particleCount: 300,
-      spread: 400,
-    });
-    setTimeout(() => {
-      window.confetti.reset();
-      setSuccess(false);
-    }, 1500);
-  }
+  };
 
   useEffect(() => {
     const authenticate = async () => {
@@ -54,14 +49,14 @@ const ConnectDiscord = () => {
       const code = urlParams.get("code");
       if (code) {
         try {
-          setLoading(true)
+          setLoading(true);
           const captchaToken = await recaptchaRef.current.executeAsync();
           recaptchaRef.current.reset();
-          await authenticateDiscord({code, captchaToken});
+          await authenticateDiscord({ code, captchaToken });
           await initUser();
-         showSuccess()
+          showSuccess();
         } catch (e) {
-          setLoading(false)
+          setLoading(false);
           toast.error(e.message);
           clearUrlParams();
         }
@@ -73,7 +68,7 @@ const ConnectDiscord = () => {
 
   return (
     <div className="connect_discord">
-       <ReCAPTCHA
+      <ReCAPTCHA
         ref={recaptchaRef}
         sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
         size="invisible"

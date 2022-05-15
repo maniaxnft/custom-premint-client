@@ -11,6 +11,7 @@ const initialState = {
   ownedNFTCount: 0,
   hasRare: false,
   isMobile: false,
+  connectionSuccess: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -82,6 +83,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isMobile: action.payload.data,
+      };
+    }
+
+    case ACTIONS.CONNECTION_SUCCESS: {
+      return {
+        ...state,
+        connectionSuccess: action.payload.data,
       };
     }
 
