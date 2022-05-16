@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import initUser from "./utils/initUser";
 import Header from "./header";
 import Body from "./body";
+import Events from "./events";
 import Footer from "./footer";
 
 const App = () => {
@@ -18,7 +20,12 @@ const App = () => {
       <Toaster />
       <div>
         <Header />
-        <Body />
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Body />}></Route>
+            <Route exact path="/events" element={<Events/>}/>
+          </Routes>
+        </Router>
         <Footer />
       </div>
     </div>
