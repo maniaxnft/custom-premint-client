@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import "./assets/Korolev/Korolev-Bold.otf";
 
@@ -8,11 +8,10 @@ import store from "./store";
 
 import Components from "./components";
 
-ReactDOM.render(
+createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <React.StrictMode>
       <Components />
     </React.StrictMode>
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
