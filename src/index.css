@@ -1,18 +1,30 @@
 @font-face {
-  font-family: 'Korolev';
-  src: local('Korolev'),url("./assets/Korolev/Korolev-Medium.otf") format('truetype');
+  font-family: "Korolev";
+  src: local("Korolev"),
+    url("./assets/Korolev/Korolev-Medium.otf") format("truetype");
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Korolev';
+  font-family: "Korolev";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  position: relative;
 }
 
-.unselectable { 
+.unselectable {
   -webkit-user-select: none;
   -khtml-user-select: none;
   -webkit-touch-callout: none;

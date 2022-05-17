@@ -1,5 +1,5 @@
-import store from "../../store";
-import { ACTIONS } from "../../store/actions";
+import store from "../store";
+import { ACTIONS } from "../store/actions";
 
 const setLoading = async (data) => {
   store.dispatch({

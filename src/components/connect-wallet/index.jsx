@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 import useMetamaskLogin from "./useMetamaskLogin";
 import MetamaskLogo from "../../assets/metamask.png";
 import { logout } from "../../services";
-import disconnect from "../utils/disconnect";
-import setLoading from "../utils/loading";
+import disconnect from "../../utils/disconnect";
+import setLoading from "../../utils/loading";
 
 const ConnectWallet = () => {
   const { setIsConnecting, isConnecting, signAndVerifyMessage, walletAddress } =

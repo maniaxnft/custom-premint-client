@@ -1,6 +1,6 @@
-import store from "../../store";
-import { getUserInfo } from "../../services";
-import { ACTIONS } from "../../store/actions";
+import store from "../store";
+import { getUserInfo } from "../services";
+import { ACTIONS } from "../store/actions";
 
 const initUser = async () => {
   try {

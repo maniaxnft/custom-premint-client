@@ -3,14 +3,13 @@ import "./index.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import classNames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import Logo from "../../assets/twitter.svg";
 import { requestTwitterToken, checkTwitterResult } from "../../services";
-import initUser from "../utils/initUser";
-import setLoading from "../utils/loading";
-import clearUrlParams from "../utils/clearUrlParams";
+import initUser from "../../utils/initUser";
+import setLoading from "../../utils/loading";
+import clearUrlParams from "../../utils/clearUrlParams";
 import { ACTIONS } from "../../store/actions";
 
 const ConnectTwitter = () => {
@@ -53,7 +52,6 @@ const ConnectTwitter = () => {
   }, []);
 
   const onClick = async () => {
-    if (!twitterName) {
       try {
         setLoading(true);
         const captchaToken = await recaptchaRef.current.executeAsync();
@@ -69,7 +67,6 @@ const ConnectTwitter = () => {
         setLoading(false);
         toast.error(e.message);
       }
-    }
   };
 
   return (
@@ -80,10 +77,7 @@ const ConnectTwitter = () => {
         size="invisible"
       />
       <div
-        className={classNames({
-          connect_twitter__button: true,
-          connect_twitter__button__disabled: twitterName,
-        })}
+        className="connect_twitter__button"
         onClick={onClick}
       >
         <img
@@ -91,9 +85,9 @@ const ConnectTwitter = () => {
           alt="twitter"
           className="connect_twitter__button__logo"
         />
-        <div className="connect_twitter__button__text">Connect Twitter</div>
+        <div className="connect_twitter__button__text">
+        {twitterName ? "Connect Again" : " Connect Twitter"}</div>
       </div>
-
       {twitterName && (
         <div className="connect_twitter__success">{`- You are successfully connected, ${twitterName}!`}</div>
       )}
