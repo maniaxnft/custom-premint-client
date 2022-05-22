@@ -4,12 +4,6 @@ import { ACTIONS } from "../store/actions";
 
 const initUser = async () => {
   try {
-    store.dispatch({
-      type: ACTIONS.SET_LOADING,
-      payload: {
-        data: true,
-      },
-    });
     const user = await getUserInfo();
     if (user?.discordName) {
       store.dispatch({
@@ -59,12 +53,6 @@ const initUser = async () => {
         },
       });
     }
-    store.dispatch({
-      type: ACTIONS.SET_LOADING,
-      payload: {
-        data: false,
-      },
-    });
   } catch (e) {
     store.dispatch({
       type: ACTIONS.SET_LOADING,

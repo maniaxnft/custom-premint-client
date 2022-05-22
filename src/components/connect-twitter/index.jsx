@@ -35,12 +35,12 @@ const ConnectTwitter = () => {
         try {
           setLoading(true);
           await checkTwitterResult();
-          setLoading(false);
           showSuccess();
         } catch (e) {
           setLoading(false);
           toast.error(e.message);
         } finally {
+          setLoading(false);
           clearUrlParams();
         }
       }

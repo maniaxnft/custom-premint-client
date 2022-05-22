@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./index.css";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,6 @@ const ConnectDiscord = () => {
   const discordName = useSelector((state) => state.discordName);
   const dispatch = useDispatch();
   const recaptchaRef = useRef(null);
-  const [isProcessing, setIsProcessing] = useState(false);
 
   const onClick = () => {
     window.location.replace(process.env.REACT_APP_DISCORD_AUTH_URL);
@@ -35,13 +34,12 @@ const ConnectDiscord = () => {
   };
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
     const authenticate = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get("code");
-      if (code && !isProcessing) {
-        setIsProcessing(true);
-        setLoading(true);
+      if (code) {
         try {
+          setLoading(true)
           const captchaToken = await recaptchaRef.current.executeAsync();
           recaptchaRef.current.reset();
           await authenticateDiscord({ code, captchaToken });
@@ -57,7 +55,9 @@ const ConnectDiscord = () => {
     };
     authenticate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [window.location.search, isProcessing]);
+  }, []);
+
+  
 
   return (
     <div className="connect_discord">
