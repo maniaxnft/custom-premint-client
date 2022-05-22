@@ -7,7 +7,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import Logo from "../../assets/twitter.svg";
 import { requestTwitterToken, checkTwitterResult } from "../../services";
-import initUser from "../../utils/initUser";
 import setLoading from "../../utils/loading";
 import clearUrlParams from "../../utils/clearUrlParams";
 import { ACTIONS } from "../../store/actions";
@@ -36,7 +35,6 @@ const ConnectTwitter = () => {
         try {
           setLoading(true);
           await checkTwitterResult();
-          await initUser();
           setLoading(false);
           showSuccess();
         } catch (e) {
