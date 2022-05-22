@@ -8,6 +8,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Logo from "../../assets/discord.svg";
 import { authenticateDiscord } from "../../services";
 import setLoading from "../../utils/loading";
+import initUser from "../../utils/initUser";
 import clearUrlParams from "../../utils/clearUrlParams";
 import { ACTIONS } from "../../store/actions";
 
@@ -44,6 +45,7 @@ const ConnectDiscord = () => {
           const captchaToken = await recaptchaRef.current.executeAsync();
           recaptchaRef.current.reset();
           await authenticateDiscord({ code, captchaToken });
+          await initUser();
           showSuccess();
         } catch (e) {
           toast.error(e.message);
