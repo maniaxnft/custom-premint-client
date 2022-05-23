@@ -42,16 +42,18 @@ const ConnectWallet = () => {
   };
 
   useEffect(() => {
-    window.ethereum.on("accountsChanged", async (accounts) => {
-      if (accounts?.length === 0) {
-        try {
-          await logout();
-          disconnect();
-        } catch (e) {
-          toast.error(e.message);
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", async (accounts) => {
+        if (accounts?.length === 0) {
+          try {
+            await logout();
+            disconnect();
+          } catch (e) {
+            toast.error(e.message);
+          }
         }
-      }
-    });
+      });
+    }
   }, []);
 
   return (

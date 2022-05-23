@@ -55,16 +55,17 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        {isDiscordMember && isDiscordMember ? (
+        {isDiscordMember ? (
           <div className="dashboard__body__item">
-            <i className="fa-solid fa-check success_color"></i> You can
-            attend whitelist events in our Discord Server!
+            <i className="fa-solid fa-check success_color"></i> Stay tuned for
+            our whitelist events, we will announce them through our Twitter and
+            Discord!
           </div>
         ) : (
           <div className="dashboard__body__item">
             <i className="fa-solid fa-xmark fail_color"></i> You need to follow
-            our Twitter and also become a <b>Verified Member</b>{" "}
-            on Discord to attend whitelist events.
+            our Twitter and also become a <b>Verified Member</b> on Discord to
+            attend whitelist events.
           </div>
         )}
 

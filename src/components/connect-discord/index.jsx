@@ -78,7 +78,7 @@ const ConnectDiscord = () => {
       </div>
       {discordName && (
         <div className="connect_discord__success">
-          {`- You are successfully connected, ${discordName}!`}
+          {`- You are successfully connected `} <b>{discordName}!</b>
         </div>
       )}
     </div>
