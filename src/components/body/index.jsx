@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 
-import { useDispatch } from "react-redux";
-
 import Main from "../main";
 import MobileWarning from "../mobile-warning";
-import { ACTIONS } from "../../store/actions";
 
 const Body = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const dispatch = useDispatch()
 
-  const handleWindowSizeChange = () => {
-    dispatch({
-      type: ACTIONS.IS_MOBILE,
-      payload: {
-        data: window.innerWidth <= 768,
-      },
-    });
-    setIsMobile(window.innerWidth <= 768);
-  };
   useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      setIsMobile(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div className="body">{isMobile ? <MobileWarning /> : <Main />}</div>;

@@ -79,13 +79,6 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ACTIONS.IS_MOBILE: {
-      return {
-        ...state,
-        isMobile: action.payload.data,
-      };
-    }
-
     case ACTIONS.CONNECTION_SUCCESS: {
       return {
         ...state,
