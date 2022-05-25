@@ -1,6 +1,7 @@
 import store from "../store";
 import { getUserInfo } from "../services";
 import { ACTIONS } from "../store/actions";
+import toast from "react-hot-toast";
 
 const initUser = async () => {
   try {
@@ -60,6 +61,7 @@ const initUser = async () => {
         data: false,
       },
     });
+    toast.error(e.message);
   }
 };
 
