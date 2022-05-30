@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
@@ -7,7 +7,6 @@ import {
   getNonce,
   logout,
   validateSignature,
-  isAuthenticated,
 } from "../../services";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS } from "../../store/actions";
@@ -17,39 +16,6 @@ const useMetamaskLogin = () => {
   const [isConnecting, setIsConnecting] = useState(false);
   const dispatch = useDispatch();
   const address = useSelector((state) => state.walletAddress);
-
-
-  const checkIsAuthenticated = useCallback(async () => {
-    try {
-      const walletAddress = await isAuthenticated();
-      if (walletAddress) {
-        dispatch({
-          type: ACTIONS.SET_WALLET_ADDRESS,
-          payload: {
-            data: walletAddress,
-          },
-        });
-      } else {
-        dispatch({
-          type: ACTIONS.SET_WALLET_ADDRESS,
-          payload: {
-            data: "",
-          },
-        });
-      }
-    } catch (e) {
-      dispatch({
-        type: ACTIONS.SET_WALLET_ADDRESS,
-        payload: {
-          data: "",
-        },
-      });
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    checkIsAuthenticated();
-  }, [checkIsAuthenticated]);
 
   const signAndVerifyMessage = async (captchaToken) => {
     if (!address) {

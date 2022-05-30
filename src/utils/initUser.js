@@ -1,11 +1,21 @@
 import store from "../store";
-import { getUserInfo } from "../services";
+import { getUserInfo, isAuthenticated } from "../services";
 import { ACTIONS } from "../store/actions";
 import toast from "react-hot-toast";
 
 const initUser = async () => {
   try {
+    const walletAddress = await isAuthenticated();
     const user = await getUserInfo();
+
+    if (walletAddress) {
+      store.dispatch({
+        type: ACTIONS.SET_WALLET_ADDRESS,
+        payload: {
+          data: walletAddress,
+        },
+      });
+    }
     if (user?.discordName) {
       store.dispatch({
         type: ACTIONS.SET_DISCORD_NAME,
@@ -55,13 +65,9 @@ const initUser = async () => {
       });
     }
   } catch (e) {
-    store.dispatch({
-      type: ACTIONS.SET_LOADING,
-      payload: {
-        data: false,
-      },
-    });
-    toast.error(e.message);
+    if (e.response?.status !== 401) {
+      toast.error(e.message);
+    }
   }
 };
 

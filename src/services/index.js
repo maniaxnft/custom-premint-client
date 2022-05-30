@@ -13,7 +13,7 @@ export const isAuthenticated = async () => {
     });
     return res.data?.walletAddress;
   } catch (e) {
-    return false;
+    throw e;
   }
 };
 
@@ -126,7 +126,9 @@ export const getUserInfo = async () => {
     const res = await mainInstance.get("/user", { withCredentials: true });
     return res.data;
   } catch (e) {
-    if (e.response?.data) {
+    if (e.response?.status === 401) {
+      return;
+    } else if (e.response?.data) {
       throw new Error(e.response.data);
     } else {
       throw new Error(e.message);
